@@ -82,4 +82,4 @@ async def crawl_until_finish():
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(asyncio.wait([crawl_directory('/16_16379/')]))
+    loop.run_until_complete(asyncio.wait([crawl_until_finish()]))
