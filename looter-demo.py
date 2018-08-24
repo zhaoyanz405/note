@@ -20,7 +20,7 @@ async def crawl(route_url):
     if not route_url:
         return ''
 
-    tree = await looter.async_fetch(domain + route_url)
+    tree = await looter.async_fetch(domain + route_url if domain not in route_url else route_url)
     lines = tree.css("div[id='content']::text").extract()
     for line in lines:
         # line = line.replace('\xa0', '')
@@ -28,7 +28,7 @@ async def crawl(route_url):
 
 
 async def crawl_directory(novel_url):
-    tree = await looter.async_fetch(domain + novel_url)
+    tree = await looter.async_fetch(domain + novel_url if domain not in novel_url else novel_url)
     title = tree.css("h2::text").extract()[0]
     a_list = tree.css('a')
 
@@ -77,7 +77,7 @@ async def crawl_until_finish():
             time.sleep(1 * 60)
 
     for novel_url in list(set(novel_url_list)):
-        pass
+        await crawl_directory(novel_url)
 
 
 if __name__ == "__main__":
