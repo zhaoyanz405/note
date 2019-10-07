@@ -39,6 +39,16 @@ class SingleLinkedList:
             latest = latest.next
         latest.next = node
 
+    def insert(self, anchor, node: Node):
+        latest = self.head
+        if latest is anchor:
+            latest.next, node.next = node, latest.next
+
+        while latest.next:
+            latest = latest.next
+            if latest is anchor:
+                latest.next, node.next = node, latest.next
+
     def show(self):
         latest = self.head
         while latest:
@@ -53,4 +63,5 @@ node3 = Node('3')
 sl = SingleLinkedList(head=node1)
 sl.append(node2)
 sl.append(node3)
+sl.insert(node1, Node('4'))
 sl.show()
