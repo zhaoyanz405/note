@@ -7,7 +7,7 @@ date: 2019/10/7 9:15
 
 
 class Node:
-    def __init__(self, data, next_point):
+    def __init__(self, data, next_point=None):
         """
 
         :param data:
@@ -18,27 +18,39 @@ class Node:
 
 
 class SingleLinkedList:
-    def __init__(self):
-        self.head = None
+    def __init__(self, head=None):
+        self.head = head
 
-    def next(self):
-        if self.head.next:
-            self.head = self.head.next
-        else:
-            raise StopIteration
+    # 不可以，因为调用next后，本质上这个链表的长度变短了
+    # def next(self):
+    #     if self.head.next:
+    #         self.head = self.head.next
+    #     else:
+    #         raise StopIteration
+
+    def append(self, node: Node):
+        if not self.head:
+            self.head = node
+            return
+
+        # 否则遍历，append到队尾
+        latest = self.head
+        while latest.next:
+            latest = latest.next
+        latest.next = node
+
+    def show(self):
+        latest = self.head
+        while latest:
+            print(latest.data)
+            latest = latest.next
 
 
-node3 = Node('3', None)
-node2 = Node('2', node3)
-node1 = Node('1', node2)
+node1 = Node('1')
+node2 = Node('2')
+node3 = Node('3')
 
-sl = SingleLinkedList()
-sl.head = node1
-
-while True:
-    try:
-        print(sl.head.data)
-        sl.next()
-    except StopIteration:
-        print('end')
-        break
+sl = SingleLinkedList(head=node1)
+sl.append(node2)
+sl.append(node3)
+sl.show()
