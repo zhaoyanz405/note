@@ -1,1 +1,1 @@
-## a spider for novel
+note world. note self.
