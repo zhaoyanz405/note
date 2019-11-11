@@ -68,18 +68,15 @@ with conn:
     print('Connect by', addr)
     d_list = []
     while True:
-        data = conn.recv(1024)
+        data = conn.recv(128)
         if not data:
             break
 
-        http_data = parse(data)
-        print(http_data)
-        response = handle(http_data['url'])
+        print(data)
+        if data.decode('utf-8').find('\r\n\r\n'):
+            break
 
-        conn.sendall(response)
-        print('send done.')
 s.close()
-
 #
 # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 #     s.bind((HOST, PORT))
