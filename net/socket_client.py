@@ -10,7 +10,7 @@ HOST = '127.0.0.1'
 PORT = 8085
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
-data = "GET / HTTP/1.1 \r\nHOST 127.0.0.1:8085\r\n"
+data = "GET / HTTP/1.1\r\nHOST 127.0.0.1:8085\r\n\r\n"
 
 s.send(data.encode('utf-8'))
 data = s.recv(1024)
